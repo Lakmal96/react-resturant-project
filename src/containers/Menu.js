@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Basket from "../components/Basket";
 import MenuItems from "../components/MenuItems";
 
 class Menu extends Component {
@@ -11,10 +12,30 @@ class Menu extends Component {
     },
   };
 
+  addItemListner = (item) => {
+    const updatedOrder = { ...this.state.order };
+    updatedOrder[item] = this.state.order[item] + 1;
+    this.setState({ order: updatedOrder });
+  };
+
+  removeItemListner = (item) => {
+    const updatedOrder = { ...this.state.order };
+    if (updatedOrder[item] >= 1) {
+      updatedOrder[item] = this.state.order[item] - 1;
+    } else {
+      return;
+    }
+    this.setState({ order: updatedOrder });
+  };
+
   render() {
     return (
-      <div>
-        <MenuItems />
+      <div className="menu">
+        <MenuItems
+          itemAdded={this.addItemListner}
+          itemRemoved={this.removeItemListner}
+        />
+        <Basket orderItems={this.state.order} />
       </div>
     );
   }

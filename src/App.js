@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import Layout from "./components/Layout";
-import "./App.css";
+
 import Menu from "./containers/Menu";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Layout>
+      <div className="layout">
+        <header>Toolbar, SideDrawer, Backdrop</header>
+        <main>
           <Menu />
-        </Layout>
+        </main>
+        <footer>Footer</footer>
       </div>
     );
   }
