@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import Basket from "../components/Basket";
 import MenuItems from "../components/MenuItems";
 
+const prices = {
+  pizza: 1200,
+  burger: 900,
+  fries: 450,
+  cola: 300,
+};
+
 class Menu extends Component {
   state = {
     order: {
@@ -10,12 +17,16 @@ class Menu extends Component {
       fries: 0,
       cola: 0,
     },
+    bill: 0,
   };
 
   addItemListner = (item) => {
     const updatedOrder = { ...this.state.order };
     updatedOrder[item] = this.state.order[item] + 1;
-    this.setState({ order: updatedOrder });
+
+    const updatedBill = this.state.bill + prices[item];
+
+    this.setState({ order: updatedOrder, bill: updatedBill });
   };
 
   removeItemListner = (item) => {
@@ -25,7 +36,8 @@ class Menu extends Component {
     } else {
       return;
     }
-    this.setState({ order: updatedOrder });
+    const updatedBill = this.state.bill - prices[item];
+    this.setState({ order: updatedOrder, bill: updatedBill });
   };
 
   render() {
@@ -35,7 +47,7 @@ class Menu extends Component {
           itemAdded={this.addItemListner}
           itemRemoved={this.removeItemListner}
         />
-        <Basket orderItems={this.state.order} />
+        <Basket orderItems={this.state.order} totalBill={this.state.bill} />
       </div>
     );
   }

@@ -12,6 +12,7 @@ const Basket = (props) => {
   return (
     <div className="basket">
       {orders}
+      Total Bill: {props.totalBill}
       <button>Order Now</button>
     </div>
   );
