@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Basket from "../components/Basket";
 import MenuItems from "../components/MenuItems";
+import Modal from "../components/Modal";
 
 const prices = {
   pizza: 1200,
@@ -43,10 +44,12 @@ class Menu extends Component {
   render() {
     return (
       <div className="menu">
+        <Modal order={this.state.order} />
         <MenuItems
           itemAdded={this.addItemListner}
           itemRemoved={this.removeItemListner}
         />
+
         <Basket orderItems={this.state.order} totalBill={this.state.bill} />
       </div>
     );
