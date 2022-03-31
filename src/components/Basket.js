@@ -13,7 +13,9 @@ const Basket = (props) => {
     <div className="basket">
       {orders}
       Total Bill: {props.totalBill}
-      <button>Order Now</button>
+      <button disabled={!props.purchasable} onClick={props.showSummary}>
+        Order Now
+      </button>
     </div>
   );
 };

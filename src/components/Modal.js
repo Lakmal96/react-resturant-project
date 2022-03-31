@@ -13,9 +13,10 @@ const Modal = (props) => {
   });
 
   return (
-    <div className="modal">
+    <div className="modal" style={{ opacity: props.showSummary ? "1" : "0" }}>
       <h2>Your Order Summary!</h2>
       <ul className="modal-list">{orderSummary}</ul>
+      <h3>Total Bill : {props.totalBill}</h3>
       <button>Continue</button>
       <button>Cancel</button>
     </div>

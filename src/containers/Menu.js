@@ -19,7 +19,20 @@ class Menu extends Component {
       cola: 0,
     },
     bill: 0,
+    purchaceOrder: false,
+    showSummary: false,
   };
+
+  updatePurchaseOrderState(order) {
+    const sum = Object.keys(order)
+      .map((orderItem) => {
+        return order[orderItem];
+      })
+      .reduce((sum, val) => {
+        return sum + val;
+      }, 0);
+    this.setState({ purchaceOrder: sum > 0 });
+  }
 
   addItemListner = (item) => {
     const updatedOrder = { ...this.state.order };
@@ -28,6 +41,7 @@ class Menu extends Component {
     const updatedBill = this.state.bill + prices[item];
 
     this.setState({ order: updatedOrder, bill: updatedBill });
+    this.updatePurchaseOrderState(updatedOrder);
   };
 
   removeItemListner = (item) => {
@@ -39,18 +53,32 @@ class Menu extends Component {
     }
     const updatedBill = this.state.bill - prices[item];
     this.setState({ order: updatedOrder, bill: updatedBill });
+    this.updatePurchaseOrderState(updatedOrder);
+  };
+
+  showSummaryHandler = () => {
+    this.setState({ showSummary: true });
   };
 
   render() {
     return (
       <div className="menu">
-        <Modal order={this.state.order} />
+        <Modal
+          order={this.state.order}
+          showSummary={this.state.showSummary}
+          totalBill={this.state.bill}
+        />
         <MenuItems
           itemAdded={this.addItemListner}
           itemRemoved={this.removeItemListner}
         />
 
-        <Basket orderItems={this.state.order} totalBill={this.state.bill} />
+        <Basket
+          orderItems={this.state.order}
+          totalBill={this.state.bill}
+          purchasable={this.state.purchaceOrder}
+          showSummary={this.showSummaryHandler}
+        />
       </div>
     );
   }

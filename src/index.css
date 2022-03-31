@@ -73,12 +73,13 @@ img {
 
 /* Modal */
 .modal {
-  width: 70%;
+  width: 40%;
+  /* z-index: 200; add button problem */
   border: 1px solid black;
   position: fixed;
   background-color: wheat;
   top: 30%;
-  left: 15%;
+  left: 30%;
   text-align: center;
   padding: 10px;
 }
