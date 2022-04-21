@@ -56,8 +56,16 @@ class Menu extends Component {
     this.updatePurchaseOrderState(updatedOrder);
   };
 
+  purchaseCancelHandler = () => {
+    this.setState({ showSummary: false });
+  };
+
   showSummaryHandler = () => {
     this.setState({ showSummary: true });
+  };
+
+  purchaceOrderHandler = () => {
+    alert("Continue");
   };
 
   render() {
@@ -67,6 +75,9 @@ class Menu extends Component {
           order={this.state.order}
           showSummary={this.state.showSummary}
           totalBill={this.state.bill}
+          modalClosed={this.purchaseCancelHandler}
+          clickedOrder={this.purchaceOrderHandler}
+          clickedCancel={this.purchaseCancelHandler}
         />
         <MenuItems
           itemAdded={this.addItemListner}
